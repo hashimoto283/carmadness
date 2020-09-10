@@ -10,7 +10,7 @@ public class createScript : MonoBehaviour
     public GameObject Ground2;
     public GameObject[] randomObjects;
     int border = 1000;
-    float enemyBorder = 200;
+    float enemyBorder = 150;
 
     void Update()
     {
@@ -43,8 +43,7 @@ public class createScript : MonoBehaviour
     void CreateEnemy()
     {
         int index = Random. Range(0, randomObjects.Length);
-        //Instantiate(Enemy, new Vector3(Random.Range(-5f, 5f), 0f, enemyBorder + 250f), Enemy.transform.rotation);
-        Instantiate(randomObjects[index], new Vector3(Random.Range(-5f,5f), 0f, enemyBorder +250f), randomObjects[index].transform.rotation);
-        enemyBorder += 200;
+        Instantiate(randomObjects[index], new Vector3(Random.Range(-5f,5f), 0f, enemyBorder +150f), randomObjects[index].transform.rotation);
+        enemyBorder += 150;
     }
 }
