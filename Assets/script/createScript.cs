@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class createScript : MonoBehaviour
 {
+    //public GameObject Enemy;
+    //public GameObject barricade;
     public GameObject Ground1;
     public GameObject Ground2;
+    public GameObject[] randomObjects;
     int border = 1000;
-  
+    float enemyBorder = 200;
 
     void Update()
     {
         if (transform.position.z > border)
         {
             CreateMap();
+        }
+        if(transform.position.z > enemyBorder)
+        {
+            CreateEnemy();
         }
     }
     void CreateMap()
@@ -32,5 +39,12 @@ public class createScript : MonoBehaviour
             Vector3 temp = new Vector3(0, 0.05f, border);
             Ground2.transform.position = temp;
         }
+    }
+    void CreateEnemy()
+    {
+        int index = Random. Range(0, randomObjects.Length);
+        //Instantiate(Enemy, new Vector3(Random.Range(-5f, 5f), 0f, enemyBorder + 250f), Enemy.transform.rotation);
+        Instantiate(randomObjects[index], new Vector3(Random.Range(-5f,5f), 0f, enemyBorder +250f), randomObjects[index].transform.rotation);
+        enemyBorder += 200;
     }
 }

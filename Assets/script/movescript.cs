@@ -5,7 +5,9 @@ using UnityEngine;
 public class movescript : MonoBehaviour
 {
 	float speed = 0f;
-	float movePower = 0.2f;
+    public float movePower = 0.2f;
+	public float maxSpeed = 100f;
+	public float carSpeed = 3f;
 	Rigidbody rb;
 
 	void Start()
@@ -28,7 +30,7 @@ public class movescript : MonoBehaviour
 			Left(); //左移動
 		}
 		//減速
-		speed -= 2f;
+		speed -= 1f;
 		//最低速度
 		if (speed < 0)
 		{
@@ -38,7 +40,8 @@ public class movescript : MonoBehaviour
 
 	void Accel()
 	{
-		speed += 3f;
+		speed += carSpeed;
+		speed = Mathf.Clamp(speed, 0, maxSpeed);
 		rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, speed);
 	}
 
@@ -59,4 +62,11 @@ public class movescript : MonoBehaviour
 			transform.position = temp;
 		}
 	}
+	void OnCollisionEnter(Collision col)
+    {
+		if(col.gameObject.tag == "Enemy")
+        {
+			speed = 0;
+        }
+    }
 }
